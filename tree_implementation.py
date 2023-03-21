@@ -49,6 +49,7 @@ class LinkedBinaryTree:
             self.right = right
 
     class Position:
+        """ An abstraction representing the location of a single element"""
         def __init__(self, container, node):
             self.container = container
             self.node = node
@@ -151,12 +152,15 @@ class LinkedBinaryTree:
         return node.element
 
     def is_root(self, p):
+        """Return True if position p represents the root of the tree"""
         return self.root_() == p
 
     def is_leaf(self, p):
+        """Return True if position p does not have any children."""
         return self.num_children(p) == 0
 
     def is_empty(self):
+        """Return True if the tree is empty"""
         return len(self) == 0
 
     def sibling(self, p):
@@ -194,15 +198,18 @@ class LinkedBinaryTree:
             yield p.element_()
 
     def depth(self, p):
+        """Return the number of levels separating position p from the root"""
         if self.is_root(p):
             return 0
         else:
             return 1 + self.depth(self.parent(p))
 
     def height1(self):
+        """Return the height of the tree"""
         return max(self.depth(p) for p in self.position() if self.is_leaf(p))
 
     def height2(self):
+        """Return the height of the subtree rooted at position p."""
         if self.is_leaf(p):
             return 0
         else:
